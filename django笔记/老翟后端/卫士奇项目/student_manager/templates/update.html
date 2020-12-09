@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>update</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 1000px;
+            height: 754px;
+            background: url("{% static '3微信截图_20181123103537.jpg' %}");
+            position: relative;
+            background-size: 100% 100%;
+            margin: auto;
+            cursor: pointer;
+        }
+        #list02{
+            position: absolute;
+            left: 305px;
+            top: 261px;
+            list-style: none;
+            line-height:43px;
+            font-size: 14px;
+            font-weight: 900;
+        }
+        #list01{
+            position: absolute;
+            left: 432px;
+            top: 258px;
+            list-style: none;
+            line-height:43px;
+        }
+        #list03{
+            position: absolute;
+            left: 417.2px;
+            bottom: 202px;
+            list-style: none;
+            line-height:43px;
+            z-index: 999;
+        }
+        #date02{
+            position: absolute;
+            left: 494px;
+            bottom: 208px;
+            font-size: 14px;
+            font-weight: 900;
+        }
+        #list03 input{
+            float: left;
+            height: 30px;
+            width: 50px;
+            margin: 0 15px;
+        }
+        #list01 input{
+            height: 30px;
+            width: 250px;
+        }
+        #input01{
+            position: absolute;
+            left: 466.2px;
+            bottom: 150px;
+            width: 66.5px;
+            height: 23px;
+            background-color: rgb(120,190,240);
+            outline: none;
+            border: rgb(76,170,240) 1.5px solid;
+            border-radius: 2px;
+            font-size: 12px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+{#    修改页面 点击提交按钮后跳转到查看页面 传id号#}
+    <form action="{% url 'update' sid=stu.sid %}" method="post">
+        <ol id="list01">
+{#            姓名、年龄、性别、成绩、年月日修改框，要取名字，值为以前的内容#}
+            <li><p><input type="text" name="name" value="{{ stu.name }}"></p></li>
+            <li><p><input type="text" name="age" value="{{ stu.age }}"></p></li>
+            <li><p><input type="text" name="sex" value="{{ stu.sex }}"></p></li>
+            <li><p><input type="text" name="score01" value="{{ stu.score01 }}"></p></li>
+            <li><p><input type="text" name="score02" value="{{ stu.score02 }}"></p></li>
+            <li><p><input type="text" name="score03" value="{{ stu.score03 }}"></p></li>
+        </ol>
+        <ol id="list03">
+            <li>
+                <input type="text" name="year" value="{{ stu.date|date:'Y' }}">
+                <input type="text" name="month" value="{{ stu.date|date:'m' }}">
+                <input type="text" name="day" value="{{ stu.date|date:'d' }}">
+            </li>
+        </ol>
+        <ul id="list02">
+            <li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：</p></li>
+            <li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄：</p></li>
+            <li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性别：</p></li>
+            <li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;语文成绩：</p></li>
+            <li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;英语成绩：</p></li>
+            <li><p>数学(理)成绩：</p></li>
+            <li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登记时间：</p></li>
+        </ul>
+        <p id="date02">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</p>
+{#        提交按钮#}
+        <input type="submit" value="提交" id="input01">
+    </form>
+</div>
+</body>
+</html>
+

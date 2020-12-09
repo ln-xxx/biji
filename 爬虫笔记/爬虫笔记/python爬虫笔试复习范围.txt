@@ -1,0 +1,29 @@
+±ÊÊÔ¸´Ï°·¶Î§£º
+
+	1¡¢mysqlÓï¾ä
+
+	http://www.runoob.com/mysql/mysql-insert-query.html
+
+	2¡¢threading Ä£¿é
+
+	https://yiyibooks.cn/xx/python_352/library/threading.html
+	
+	3¡¢queue Ä£¿é
+
+	https://yiyibooks.cn/xx/python_352/library/queue.html
+
+	4¡¢python Á´½ÓÊý¾Ý¿â´æ
+
+	http://www.runoob.com/python3/python3-mysql.html
+
+	5¡¢linux »ù´¡
+
+	http://www.runoob.com/linux/linux-system-contents.html
+
+	6¡¢requests
+
+	http://docs.python-requests.org/zh_CN/latest/user/quickstart.html
+	
+	7 ÊÓÆµÍøÕ¾
+	https://www.bilibili.com/video/av21663728/?p=21
+	

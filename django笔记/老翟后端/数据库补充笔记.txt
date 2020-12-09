@@ -1,0 +1,17 @@
+简单的说：主键是唯一的，用于标识一张表。外键可以有多个，
+用于建立表和表的关系。参考网址
+https://blog.csdn.net/harbor1981/article/details/53449435
+1.关联对象的操作
+对于HeroInfo可以按照上面的操作方式进行添加，注意添加关联对象
+h=HeroInfo()
+h.hname='郭靖'
+h.hgender=True
+h.hcontent=u'降龙十八掌'
+h.hBook=b
+h.save()
+2.获得关联集合：返回当前book对象的所有hero
+b.heroinfo_set.all()
+3.有一个HeroInfo存在，
+必须要有一个BookInfo对象，提供了创建关联的数据。
+h=b.heroinfo_set.create(hname=u'黄蓉',hgender=False,hcontent='打狗棍法')
+h=b.heroinfo_set.create(hname='段誉',hgender=True,hcontent='六脉神剑')

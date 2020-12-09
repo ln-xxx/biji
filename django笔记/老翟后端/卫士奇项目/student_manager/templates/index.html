@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 1519px;
+            height: 754px;
+            background: url("{% static 'timg.jpg' %}");
+            position: relative;
+            background-size: 100% 131%;
+            cursor: pointer;
+            margin: auto;
+        }
+        #box02{
+            width: 1000px;
+            height: 520px;
+            position: absolute;
+            bottom: 0;
+            left: 259px;
+            background: url("{% static '未标题-1.jpg' %}");
+            background-size: 100% 100%;
+        }
+        ol{
+            list-style: none;
+            position: absolute;
+            top: 140px;
+            left: 20px;
+            line-height: 30px;
+        }
+        .link01{
+            color: green;
+            font-size: 13px;
+        }
+        .link02{
+            color: rgb(150,150,150);
+            font-size: 13px;
+        }
+        .link03{
+            font-family: 黑体;
+            font-size: 15.5px;
+            color: rgb(80,80,80);
+        }
+        a{
+            text-decoration: none;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+        input{
+            width: 120px;
+            height: 35px;
+            background-color: rgb(124,197,81);
+            position: absolute;
+            top: 74px;
+            left: 20px;
+            outline: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            border: rgb(110,175,70) 1px solid;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+    <div id="box02">
+    <ol>
+{#        遍历学生信息 学生信息已经通过传参传过来了#}
+        {% for stu in stus %}
+            <li>
+                <p>
+                    {% if stu.sex == '男' %}
+                        <a href="{% url 'detail' sid=stu.sid %}" class="link03">♂</a>&nbsp;
+                    {% elif stu.sex == '女' %}
+                        <a href="{% url 'detail' sid=stu.sid %}" class="link03">♀</a>&nbsp;
+                    {% endif %}
+{#                    显示学生信息的名字 点击跳转到详情页#}
+                    <a href="{% url 'detail' sid=stu.sid %}" class="link03">{{ stu.name }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'detail' sid=stu.sid %}" class="link02">{{ stu.date|date:'Y-m-d' }}</a>&nbsp;
+{#                    显示修改链接 点击跳转到修改页面#}
+                    <a href="{% url 'update' sid=stu.sid %}" class="link01">编辑</a>
+                </p>
+            </li>
+        {% endfor %}
+    </ol>
+{#    add提交按钮 提交后跳转到add#}
+    <form action="{% url 'add' %}"><input type="submit" value=" 添 加 学 生"></form>
+    </div>
+    </div>
+</body>
+</html>
+

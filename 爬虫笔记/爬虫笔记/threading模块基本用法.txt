@@ -1,0 +1,44 @@
+				threading-基于线程的并行性
+
+1.threading.active_count():
+		返回当前处于alive状态的Thread对象的个数,返回的数目等于enumerate()返				回的列表的长度
+2.threading.current_thread():
+		返回当前的Thread对象,对应于调用者控制的线程,如果调用者控制的线程不是通过
+		threading模块创建的,则返回一个额只有有限功能的虚假线程对象
+3.threading.get_dient()
+		返回当前线程的线程表示符,他是一个非0的整数
+4.threading.enumerate()
+		返回当前活着的Thread对象的列表。该列表包括守护线程、
+		由current_thread()创建的虚假线程对象和主线程。
+		它不包括已终止的线程和尚未开始的线程。
+5.threading.main_thread()
+		返回主 Thread 对象。在正常情况下，
+		主线程是从 Python 解释器中启动的线程。
+6.threading.settreace(func)
+		为所有从threading模块启动的线程设置一个跟踪函数,在每隔线程的run()方法调用之		前,func将传递给sys.settrace().
+7.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

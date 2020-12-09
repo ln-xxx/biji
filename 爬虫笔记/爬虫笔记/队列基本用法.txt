@@ -1,0 +1,28 @@
+import queue
+
+q = queue.Queue()
+   q.put('aa')  添加
+查看方法:dir(q)
+	1.q.empty()检测队列是否为空
+	2.q.full() 队列满的时候返回False
+	3.q.get()  获取
+		q.get(timeout=5) 等待5秒,显示结果
+		q.get(block=False) 直接显示结果  如果没有则显示 queue.Empty: (为空)
+	4.q.maxsize
+	5.q.mutex()互斥
+	6.q.put_nowait()不等待
+	7.q.not_empty  不为空
+	8.q.not_full  不满
+	9.q.qsize() 当前q的长度
+	10.q.queue 查看  返回的是deque双端队列类型
+	11.q.task_done 任务完成
+	12.q.unfinished_tasks 未完成
+	13.q.join()
+d = queue.LifoQueue()
+
+p = queue.PriorityQueue()
+
+s = queue.SimpleQueue()
+
+异常:
+	queue.Empty: (为空)

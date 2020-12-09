@@ -1,0 +1,83 @@
+阶段大纲:
+	一.爬虫
+	1.基本操作:
+		-登陆任意网站(伪造浏览器的任何行为)
+	2.性能相关:
+		-并发方案:异步io gevent/Twisted/asyncio/aiohttp
+		- 自定义异步io模块
+		-io多路复用:select
+	3:scrapy框架
+		介绍:异步io:Twisted
+		-基于scrapy源码自定义爬虫框架
+		-使用scrapy
+		
+	二.Torndao框架:(异步非阻塞)
+		1.Torndao的基本使用
+			-小li子
+			-自定义组件
+
+		2.Torndao源码pao析
+
+		3.自定义异步非阻塞框架
+1.爬虫的基本操作:
+	a:爬虫
+		-定向(某个网站)
+		-非定向(全网)
+	b:下载页面:就是HTML
+	   筛选:
+		-正则表达式
+	.......开源模块.....
+	1.re = requests.get(网址)
+	  re.text
+	总结:
+		response = requests.get('url')
+		response.text
+	需求1:
+	2.beautisoup
+		pip install Beautisoup4
+		from bs4 import Beautisoup
+		soup = Beautisoup(re.text,featruee='html.parser') #把真个html搞成一个一个对象
+		xx = soup.find(id='网页里面div的id')
+		print(xx)
+		总结:
+		soup = beautifusoup('<html>...',features = 'html.parser')
+		v1 = soup.find('div')
+		v1 = soup.find(id='li')
+		v1 = soup.find(div,id='li')
+
+		v2 = soup.find_all('div')
+		v2 = soup.find_all('li')
+	需求二:通过脚本自动登陆 github
+		post_dict = {'phone':'111111',password:'dssfdfd','oneMouth':1}
+		response = requests.post(url = 'http://dig.chouti.com/login/',
+				data = {})
+		print(response.text)
+		cookie_dict = respone.cookies.get_dict()
+
+
+
+网址: https://www.bilibili.com/video/av19057145/?spm_id_from=333.788.videocard.13
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

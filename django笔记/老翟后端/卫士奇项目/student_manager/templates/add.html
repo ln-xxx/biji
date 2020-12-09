@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 1000px;
+            height: 754px;
+            background: url("{% static '3微信截图_20181123103537.jpg' %}");
+            position: relative;
+            background-size: 100% 100%;
+            margin: auto;
+            cursor: pointer;
+        }
+        #list02{
+            position: absolute;
+            left: 305px;
+            top: 261px;
+            list-style: none;
+            line-height:43px;
+            font-size: 14px;
+            font-weight: 900;
+        }
+        #list01{
+            position: absolute;
+            left: 432px;
+            top: 258px;
+            list-style: none;
+            line-height:43px;
+        }
+        #list01 input{
+            height: 30px;
+            width: 250px;
+        }
+        #input01{
+            position: absolute;
+            left: 466.2px;
+            bottom: 178px;
+            width: 66.5px;
+            height: 23px;
+            background-color: rgb(120,190,240);
+            outline: none;
+            border: rgb(76,170,240) 1.5px solid;
+            border-radius: 2px;
+            font-size: 12px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+{#    添加页面 点击确认按钮后跳转到add#}
+    <form action="{% url 'add' %}" method="post">
+        <ul id="list01">
+{#            姓名、年龄、性别、成绩输入框，要取名字#}
+            <li><p><input type="text" name="name"></p></li>
+            <li><p><input type="text" name="age"></p></li>
+            <li><p><input type="text" name="sex"></p></li>
+            <li><p><input type="text" name="score01"></p></li>
+            <li><p><input type="text" name="score02"></p></li>
+            <li><p><input type="text" name="score03"></p></li>
+        </ul>
+        <ul id="list02">
+{#            姓名、年龄、性别、成绩输入框，要取名字#}
+            <li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：</p></li>
+            <li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄：</p></li>
+            <li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性别：</p></li>
+            <li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;语文成绩：</p></li>
+            <li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;英语成绩：</p></li>
+            <li><p>数学(理)成绩：</p></li>
+        </ul>
+{#        确认按钮#}
+        <p><input type="submit" value="确认" id='input01'></p>
+    </form>
+</div>
+</body>
+</html>
+

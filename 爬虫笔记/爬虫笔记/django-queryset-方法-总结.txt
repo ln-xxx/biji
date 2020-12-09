@@ -1,0 +1,173 @@
+
+一、order_by（*字段）
+
+	以字段进行排序
+
+************************************************
+
+二、values(*fields, **expressions)
+	
+# This list contains a Blog object.
+>>> Blog.objects.filter(name__startswith='Beatles')
+<QuerySet [<Blog: Beatles Blog>]>
+
+# This list contains a dictionary.
+>>> Blog.objects.filter(name__startswith='Beatles').values()
+<QuerySet [{'id': 1, 'name': 'Beatles Blog', 'tagline': 'All the latest Beatles news.'}]>
+
+>>> Blog.objects.values('id', 'name')
+<QuerySet [{'id': 1, 'name': 'Beatles Blog'}]>
+
+******************************************
+
+三、select_related(*fields)
+
+
+from django.db import models
+
+class City(models.Model):
+    # ...
+    pass
+
+class Person(models.Model):
+    # ...
+    hometown = models.ForeignKey(
+        City,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
+
+class Book(models.Model):
+    # ...
+    author = models.ForeignKey(Person, on_delete=models.CASCADE)
+
+
+
+
+# Hits the database with joins to the author and hometown tables.
+b = Book.objects.select_related('author__hometown').get(id=4)
+p = b.author         # Doesn't hit the database.
+c = p.hometown       # Doesn't hit the database.
+
+# Without select_related()...
+b = Book.objects.get(id=4)  # Hits the database.
+p = b.author         # Hits the database.
+c = p.hometown       # Hits the database.
+
+
+*************************************************
+四、defer(*fields)
+
+	延迟加载指定的字段
+
+五、only(*fields)
+	
+	指定加载指定的字段
+
+**************************************************
+
+六、bulk_create(objs, batch_size=None)
+
+	批量添加到数据库
+	
+>>> Entry.objects.bulk_create([
+...     Entry(headline='This is a test'),
+...     Entry(headline='This is only a test'),
+... ])
+
+	
+
+in_bulk()?
+in_bulk（id_list = None，field_name ='pk'）?
+获取字段值（id_list）和field_name那些值的列表，并返回一个字典，将每个值映射到具有给定字段值的对象的实例。如果id_list未提供，则返回查询集中的所有对象。field_name必须是唯一字段，并且默认为主键。
+
+>>> Blog.objects.in_bulk([1])
+{1: <Blog: Beatles Blog>}
+>>> Blog.objects.in_bulk([1, 2])
+{1: <Blog: Beatles Blog>, 2: <Blog: Cheddar Talk>}
+>>> Blog.objects.in_bulk([])
+{}
+>>> Blog.objects.in_bulk()
+{1: <Blog: Beatles Blog>, 2: <Blog: Cheddar Talk>, 3: <Blog: Django Weblog>}
+>>> Blog.objects.in_bulk(['beatles_blog'], field_name='slug')
+{'beatles_blog': <Blog: Beatles Blog>}
+
+	
+
+**************************************************
+
+七、  latest(*fields)
+      earliest(*fields)
+	
+	排序并取出
+
+
+Entry.objects.latest('pub_date')
+
+****************************************************
+八、
+	first()
+	last()
+		
+	取queryset的第一个/最后一个
+
+p = Article.objects.order_by('title', 'pub_date').first()
+
+
+***************************************************
+
+九、
+
+	exists()
+		
+	返回queryset是否为空，返回一个Bool值
+
+
+***************************************************
+
+十、
+
+	regex
+
+	Entry.objects.get(title__regex=r'^(An?|The) +')
+
+
+***************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

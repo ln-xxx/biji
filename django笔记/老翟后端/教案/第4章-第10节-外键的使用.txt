@@ -1,0 +1,140 @@
+﻿# 外键和表关系
+
+##1. 使用外键
+
+1. 应用场景：比如文章和作者之间的关系。一个文章只能由一个作者编写，但是一个作者可以写多篇文章。文章和作者之间的关系就是典型的多对一的关系。
+2. 实现方式：一对多或者多对一，都是通过`ForeignKey`来实现的。还是以文章和作者的案例进行讲解。
+
+```python
+from django.db import models
+
+class Article(models.Model):
+    title = models.CharField(max_length=20)
+    content = models.TextField()
+    
+    author = models.ForeignKey('Person', on_delete=models.CASCADE)
+
+
+class Person(models.Model):
+    name = models.CharField(max_length=20)
+```
+
+## 2. 视图函数中创建模型, 并设置外键
+
+**方法1: ** 给`Article`对象指定`author`，就可以使用以下代码来完成：
+
+```python
+def index(request):
+    p = Person(name='小花')
+    # 将p先保存到数据库中
+    p.save()
+    a = Article(title='日记1', content='二狗打小报告, 真讨厌' )
+    a.author = p
+    a.save()
+    return HttpResponse('')
+```
+
+并且以后如果想要获取某个用户下所有的文章，可以通过`article_set`来实现。示例代码如下：
+
+```python
+def index(request):
+    # 获取person表中的第一个用户
+    p = Person.objects.first()
+    # 获取该用户的所有文章
+    s = p.article_set.all()
+  
+    for x in s:
+        print(x)
+    return HttpResponse('')
+```
+
+**方法2: **
+
+````python
+def index(request):
+    a = Article(title='日记3', content='哇,三胖瘦了更好看!')
+    
+    p = Person.objects.first()
+    p.article_set.add(a, bulk=False)
+    return HttpResponse('')
+````
+
+- 使用`bulk=False`，那么Django会自动的保存article，而不需要在添加到p之前先保存article。
+
+- 或者是另外一种解决方式是，在添加到`category.article_set`中之前，先将`article`保存到数据库中。但是如果`article.category`不能为空，那么就产生一种死循环了，article没有`category`不能保存，而将article添加到`cateogry.artile_set`中，又需要article之前是已经存储到数据库中的。
+
+  如下:
+
+  ````python
+  # ----- 此代码不成立 -----
+  def index(request):
+      a = Article(title='日记3', content='哇,三胖瘦了更好看!')
+      a.save()
+      p = Person.objects.first()
+      p.article_set.add(a)
+      return HttpResponse('')
+  # django.db.utils.IntegrityError: NOT NULL constraint failed: firsta_article.author_id
+  ````
+
+- 如果是上面的那种需求，建议使用`bulk=False`的解决方案。
+
+##3. 多个app的模型间引用外键
+
+创建一个新的app, 并设计一个Reader模型
+
+````python
+from django.db import models
+
+class Reader(models.Model):
+    name = models.CharField(max_length=20)
+````
+
+回到Article模型中, 设置reader外键:
+
+````python
+class Article(models.Model):
+    title = models.CharField(max_length=20)
+    content = models.TextField()
+    author = models.ForeignKey('Person', on_delete=models.CASCADE)
+    
+    # 设置外键 允许为空
+    reader = models.ForeignKey('reader.Reader', on_delete=models.CASCADE, null=True)
+````
+
+
+
+##4. 外键删除操作：
+
+如果一个模型使用了外键。那么在对方那个模型被删掉后，该进行什么样的操作。可以通过`on_delete`来指定。可以指定的类型如下：
+
+1. `CASCADE`：级联操作。如果外键对应的那条数据被删除了，那么这条数据也会被删除。
+2. `PROTECT`：受保护。即只要这条数据引用了外键的那条数据，那么就不能删除外键的那条数据。
+3. `SET_NULL`：设置为空。如果外键的那条数据被删除了，那么在本条数据上就将这个字段设置为空。如果设置这个选项，前提是要指定这个字段可以为空。
+4. `SET_DEFAULT`：设置默认值。如果外键的那条数据被删除了，那么本条数据上就将这个字段设置为默认值。如果设置这个选项，前提是要指定这个字段一个默认值。
+5. `SET()`：如果外键的那条数据被删除了。那么将会获取`SET`函数中的值来作为这个外键的值。`SET`函数可以接收一个可以调用的对象（比如函数或者方法），如果是可以调用的对象，那么会将这个对象调用后的结果作为值返回回去。
+6. `DO_NOTHING`：不采取任何行为。一切全看数据库级别的约束。
+
+
+
+*练习:*
+
+*1. 创建学生模型, 字段有: 姓名, 班级, 性别*
+
+*2. 创建班级模型, 字段有: 班级编号, 例如1803 1804 1805*
+
+*3. 设置学生模型中的外键设置为班级*
+
+*4. 创建2个学生, 姓名李莉, , 性别女; 姓名李雷,  性别男*
+
+*5. 创建2个班级, 班级名称为1806*, 1806
+
+*6. 给这个李莉增加外键班级为1806*
+
+*7. 给班级1806C增加学生乱世佳人*
+
+*8. 创建一个app名为sch*
+
+*9. 在sch这个应用中创建一个教师Teacher, 其中字段有: 姓名name*
+
+*10. 将学生模型中增加一个外键, 设置为教师*
+

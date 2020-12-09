@@ -1,0 +1,24 @@
+scrapy框架:
+	安装参考:Linux
+      		pip3 install scrapy
+ 
+ 
+		Windows
+      			a. pip3 install wheel
+      			b. 下载twisted http://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted
+      			c. 进入下载目录，执行 pip3 install 				Twisted?17.1.0?cp35?cp35m?win_amd64.whl
+      			d. pip3 install scrapy
+      			e. 下载并安装pywin32：https://sourceforge.net/projects/pywin32/files/
+	
+	使用:
+	1.指定初始URL
+	2.解析响应内容
+		-给调度器
+		-给item:pipeline;用于格式化,初始化
+
+
+scrapy startproject day
+cd day
+scrapy genspider xx xx.com
+打开 aa.py进行编辑
+scrapy crawl chouti --nolog

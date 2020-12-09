@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 1000px;
+            height: 754px;
+            background: url("{% static '微信截图_20181123103537.jpg' %}");
+            position: relative;
+            background-size: 100% 100%;
+            margin: auto;
+            cursor: pointer;
+        }
+        #list01{
+            position: absolute;
+            left: 370px;
+            top: 267px;
+            list-style: none;
+            line-height:32.5px;
+        }
+        #list02{
+            position: absolute;
+            left: 660.2px;
+            top: 425.5px;
+            list-style: none;
+            line-height:27.5px;
+        }
+        #input01{
+            position: absolute;
+            left: 424px;
+            bottom: 178px;
+            width: 66.5px;
+            height: 23px;
+            background-color: rgb(120,190,240);
+            outline: none;
+            border: rgb(76,170,240) 1.5px solid;
+            border-radius: 2px;
+            font-size: 12px;
+            color: #fff;
+            cursor: pointer;
+        }
+        #input02{
+            position: absolute;
+            left: 510px;
+            bottom: 178px;
+            width: 66.5px;
+            height: 23px;
+            background-color: rgb(120,190,240);
+            outline: none;
+            border: rgb(76,170,240) 1.5px solid;
+            border-radius: 2px;
+            font-size: 12px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+{#    显示学生具体信息 stu已传过来了#}
+    <ol id="list01">
+        <li><p>{{ stu.name }}</p></li>
+        <li><p>{{ stu.age }}</p></li>
+        <li><p>{{ stu.sex }}</p></li>
+        <li><p>{{ stu.date|date:'Y年m月d日' }}</p></li>
+    </ol>
+
+    <ol id="list02">
+        <li><p>{{ stu.score01 }}</p></li>
+        <li><p>{{ stu.score02 }}</p></li>
+        <li><p>{{ stu.score03 }}</p></li>
+        <li><p>{{ stu_score }}</p></li>
+    </ol>
+
+{#    删除按钮 点击后跳转到del 还要传id号#}
+    <form action="{% url 'del' sid=stu.sid %}"><input type="submit" value="删 除" id="input02"></form>
+{#    首页按钮 点击后跳转到index#}
+    <form action="{% url 'index'%}"><input type="submit" value="首 页" id="input01"></form>
+</div>
+</body>
+</html>
+

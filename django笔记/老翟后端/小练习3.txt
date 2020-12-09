@@ -1,0 +1,41 @@
+1.在app中创建模板文件, 需要在app中创建一个名为______的directory。
+templates
+2.指定url参数的类型为UUID类形<_______:book_id>答案：uuid
+  变形：指定url参数的类型为int类形<_______:book_id>  int
+  变形：类型为str时。
+3.可以使模板结构进行优化的两种方式有____________和模板继承
+include导入
+4.使用include标签导入一个模板文件时,需要传递一个参数, 如{% include 'index.html' _______ user='张飞'  %}
+答案with
+5.path()?参数：当 Django 找到了一个匹配的准则，就会调用这个特定的视图函数，并传入一个 （）对象作为第一个参数，
+被“捕获”的参数以关键字参数的形式传入。  （B）
+A.urlpatterns
+B. HttpRequest
+C.polls
+6.常见过滤器的使用
+  比如length，lower，upper等等
+    如：{{ some|slice:"2:" }}, 如果some='haworld', 执行结果是__________world
+7.条理清晰，这样不容易混乱
+  比如：第一步做什么
+        第二步做什么
+        第三步做什么
+8.多看课件和多对比相应的代码，我感觉东西挺多的
+   比如（自己想办法怎么简记核心词再扩展）：get()方法返回一个对象，且只能匹配一个符合条件的对象，
+        如果有多个会报错；
+        filter（）方法返回一个集合（queryset），且可以包含多个符合条件的对象；
+9.空闲时整理下自己的电脑（比如游戏放在游戏文件夹，软件放在软件中） 
+10.逐渐提高自我搜索能力，和遇到什么问题解决什么问题这个需长期培养，
+遇到哪点没学过上网搜等
+比如：METHOD的GET和POST属性的区别
+https://blog.csdn.net/fuyuehua22/article/details/38705935
+      
+11.articles = Article.objects.filter(title______='world')查询title以world作为结尾的。答案endswith。
+（变形：以startswith查询title以world作为开始的）
+12.{{ value|default:"nothing" }}, value值为______时, 执行结果为nothing。答案NULL
+  变形，当过滤器为default_if_none时， value值为FALSE时，
+13.Publisher.objects.order_by("-name") 这段代码表示__。答案：逆序   （概念性的东西）
+14.models.DateTimeField里每次更新都会更新这个时间的参数是___.auto_now = True
+15.在models.py中级联删除书写是：on_delete = models.CASCADE
+   16.（宏观调控）整体性系统性，“空杯”心态。
+推荐方法：1.先适度归零，清空头脑2.整体把控，舍得舍得，先挑重要的和平时错的
+          3.留下时间反思总结
